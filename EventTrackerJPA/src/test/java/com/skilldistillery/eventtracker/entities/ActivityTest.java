@@ -12,12 +12,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class WorkoutTest {
+class ActivityTest {
 
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Workout workout;
+	private Activity activity;
 			
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,18 +32,18 @@ class WorkoutTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		workout = em.find(Workout.class, 1);
+		activity = em.find(Activity.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		workout = null;
+		activity = null;
 	}
 
 	@Test
 	void test() {
-		assertEquals("track", workout.getName());
+		assertEquals("track", activity.getName());
 	}
 
 }

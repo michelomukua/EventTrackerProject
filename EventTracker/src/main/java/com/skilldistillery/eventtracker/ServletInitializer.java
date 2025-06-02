@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TiziTrackerApplication.class);
+		return application.sources(EventTrackerApplication.class);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.skilldistillery.eventtracker.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,60 +8,88 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Workout {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="workout_id")
-	private int workoutId;
+	private int id;
 	
-	private String name;
+	private Integer duration;
 	
-	private String description;
+	@Column(name="workout_date")
+	private LocalDateTime workoutDate;
 	
-	private int duration;
-
+	private String comment;
+	
+	@ManyToOne
+	@JoinColumn(name="member_id")
+	private Member member;
+	
+	@ManyToOne
+	@JoinColumn(name="activity_id")
+	private Activity activity;
+	
 	public Workout() {
 		super();
 	}
 
-	public int getWorkoutId() {
-		return workoutId;
+	public int getId() {
+		return id;
 	}
 
-	public void setWorkoutId(int workoutId) {
-		this.workoutId = workoutId;
+	public void setId(int id) {
+		id = id;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public LocalDateTime getWorkoutDate() {
+		return workoutDate;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setWorkoutDate(LocalDateTime workoutDate) {
+		this.workoutDate = workoutDate;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
 
-	public void setDuration(int duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(workoutId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -72,22 +101,13 @@ public class Workout {
 		if (getClass() != obj.getClass())
 			return false;
 		Workout other = (Workout) obj;
-		return workoutId == other.workoutId;
+		return id == other.id;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Workout [workoutId=" + workoutId + ", name=" + name + ", description=" + description + ", duration="
-				+ duration + "]";
+		return "Workout [id=" + id + ", duration=" + duration + ", workoutDate=" + workoutDate + ", comment=" + comment
+				+ ", member=" + member + ", activity=" + activity + "]";
 	}
-
-	public Workout(int workoutId, String name, String description, int duration) {
-		super();
-		this.workoutId = workoutId;
-		this.name = name;
-		this.description = description;
-		this.duration = duration;
-	}
-
-	
 }

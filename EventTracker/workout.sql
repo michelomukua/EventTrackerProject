@@ -16,15 +16,16 @@ CREATE SCHEMA IF NOT EXISTS `tizidb` DEFAULT CHARACTER SET utf8 ;
 USE `tizidb` ;
 
 -- -----------------------------------------------------
--- Table `activity`
+-- Table `workout`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `activity` ;
+DROP TABLE IF EXISTS `workout` ;
 
-CREATE TABLE IF NOT EXISTS `activity` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `workout` (
+  `workout_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(2000) NOT NULL,
-  PRIMARY KEY (`id`))
+  `duration` INT NOT NULL,
+  PRIMARY KEY (`workout_id`))
 ENGINE = InnoDB;
 
 
@@ -34,41 +35,28 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `member` ;
 
 CREATE TABLE IF NOT EXISTS `member` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `member_id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `date_started` DATETIME NOT NULL,
   `date_ended` DATETIME NULL,
   `active` TINYINT NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`member_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `workout`
+-- Table `event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `workout` ;
+DROP TABLE IF EXISTS `event` ;
 
-CREATE TABLE IF NOT EXISTS `workout` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `workout_date` DATETIME NOT NULL,
-  `comment` VARCHAR(2000) NULL,
-  `duration` INT NULL,
-  `activity_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `event` (
+  `event_id` INT NOT NULL AUTO_INCREMENT,
   `member_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_workout_activity_idx` (`activity_id` ASC) VISIBLE,
-  INDEX `fk_workout_member1_idx` (`member_id` ASC) VISIBLE,
-  CONSTRAINT `fk_workout_activity`
-    FOREIGN KEY (`activity_id`)
-    REFERENCES `activity` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_workout_member1`
-    FOREIGN KEY (`member_id`)
-    REFERENCES `member` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `workout_id` INT NOT NULL,
+  `event_date` DATETIME NOT NULL,
+  `comment` VARCHAR(2000) NULL,
+  PRIMARY KEY (`event_id`))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -83,16 +71,16 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `activity`
+-- Data for table `workout`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tizidb`;
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (1, 'track', 'track');
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (2, 'core', 'core');
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (3 , 'aqua', 'swim');
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (4, 'cardio', 'cardio');
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (5, 'cycle', 'cycle');
-INSERT INTO `activity` (`id`, `name`, `description`) VALUES (6, 'hiit', 'hiit');
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (1, 'track', 'track', 50);
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (2, 'core', 'core', 30);
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (3 , 'aqua', 'swim', 60);
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (4, 'cardio', 'cardio', 25);
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (5, 'cycle', 'cycle', 45);
+INSERT INTO `workout` (`workout_id`, `name`, `description`, `duration`) VALUES (6, 'hiit', 'hiit', 30);
 
 COMMIT;
 
@@ -102,17 +90,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tizidb`;
-INSERT INTO `member` (`id`, `first_name`, `last_name`, `date_started`, `date_ended`, `active`) VALUES (1, 'James', 'King', '2024-08-10', NULL, 1);
+INSERT INTO `member` (`member_id`, `first_name`, `last_name`, `date_started`, `date_ended`, `active`) VALUES (1, 'James', 'King', '2024-08-10', NULL, 1);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `workout`
+-- Data for table `event`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tizidb`;
-INSERT INTO `workout` (`id`, `workout_date`, `comment`, `duration`, `activity_id`, `member_id`) VALUES (1, '2024-03-12T11:30:00', 'Enjoyed Running', 30, 1, 1);
+INSERT INTO `event` (`event_id`, `member_id`, `workout_id`, `event_date`, `comment`) VALUES (1, 1, 4, '2024-03-12T11:30:00', 'Enjoyed Running');
 
 COMMIT;
 

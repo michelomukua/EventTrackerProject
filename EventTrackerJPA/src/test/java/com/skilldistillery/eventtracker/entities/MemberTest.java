@@ -15,11 +15,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class WorkoutTest {
+public class MemberTest {
 
 	private static EntityManagerFactory emf; // expensive
 	private EntityManager em;
-	private Activity activity;
+	private Member member;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,19 +34,19 @@ public class WorkoutTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		activity = em.find(Activity.class,1);
+		member = em.find(Member.class,1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		activity = null;
+		member = null;
 	}
 
 	@Test
-	void test_Workout_entity_mapping() {
-		assertNotNull(activity);
-		assertNotNull("track", activity.getName());
+	void test_Member_entity_mapping() {
+		assertNotNull(member);
+		assertNotNull("James", member.getFirstName());
 		
 	}
 	

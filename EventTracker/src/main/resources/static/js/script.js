@@ -30,7 +30,7 @@ function init() {
 	const displayTable = document.getElementById("workoutTable");
 	const form = document.getElementById("updateWorkoutForm");
 
-	displayTable.addEventListener("click", function (event)  {
+	displayTable.addEventListener("click", function(event)  {
 		console.log(event.target.tagName);
 		if (event.target.tagName === "TD") {
 			const row = event.target.parentElement;

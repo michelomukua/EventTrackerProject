@@ -1,10 +1,8 @@
 # EventTracker REST API
+
+ # Overview
+  
   The goal of the project was to create a Java entity class POJO that modeled a database table. Then configure a Spring Boot app to publish a REST API of the model. A physical exerice   workout database table was created, annotated using Spring REST annotations then CRUD operations executed on it using Spring Data JPA. The REST API send and receive was executed using JSON.
-
-
-# Overview
-
-  Event Tracker' is a broad term for anything that keeps track of information over time. Examples of these applications are 'Mint' (financial tracking) and 'MyFitnessPal' (diet and exercise tracker). These are very involved applications with a huge feature set.
 
 
 ### Endpoints

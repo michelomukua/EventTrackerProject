@@ -1,0 +1,43 @@
+<h1>Activities</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Activity Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+   <tbody>
+      @for (activity of activities; track  activity.id) {
+      <tr>
+        <td (click)="displayEdit(activity)">{{activity.id}}</td>
+        <td>{{activity.name}}</td>
+        <td>{{activity.description}}</td>
+        <td><button (click)="deleteActivity(activity.id)">Delete</button></td>
+      </tr>
+      }
+    </tbody>
+</table>
+<br>
+<div>
+  <form name="addActivity" class="form">
+   <input [(ngModel)]="newActivity.name" type="text" name="name" />
+   <input [(ngModel)]="newActivity.description" type="text" name="description" />
+  <button (click)="addActivity(newActivity)">Add Activity</button>
+</form>
+</div>
+<br>
+@if (selected){
+  <div>
+  <h3>Editing Activity ID: {{selected.id}}</h3>
+  <form>
+    Name: <input type="text" name="name" [(ngModel)]="selected.name"> <br>
+    Description: <textarea name="description" [(ngModel)]="selected.description" cols="30" rows="3"></textarea><br>
+
+    <button (click)="editActivity= null">Cancel</button>
+    <button (click)="updateActivity(selected)">Save</button>
+  </form>
+</div>}
+

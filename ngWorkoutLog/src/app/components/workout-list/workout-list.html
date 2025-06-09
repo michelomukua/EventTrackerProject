@@ -1,0 +1,103 @@
+<h1>Workouts</h1>
+<table class="table table-striped w-75">
+  <thead>
+			<tr>
+				<th>Workout Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Activity</th>
+				<th>Date</th>
+				<th>Duration</th>
+				<th>Comment</th>
+        <th>Action</th>
+			</tr>
+		</thead>
+   <tbody>
+      @for (workout of workouts; track  workout.id) {
+      <tr>
+        <td>{{workout.id}}</td>
+        <td>{{workout.member.firstName}}</td>
+        <td>{{workout.member.lastName}}</td>
+        <td>{{workout.activity.name}}</td>
+        <td>{{workout.workoutDate}}</td>
+        <td>{{workout.duration}}</td>
+        <td>{{workout.comment}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm rounded-0" data-toggle="tooltip" title="Edit" (click)="displayEdit(workout)"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm rounded-0" data-toggle="tooltip" title="Delete" (click)="deleteWorkout(workout.id)"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+      }
+    </tbody>
+    </table>
+<br>
+<h4>Total Workout Minutes {{getTotalWorkout()}}</h4>
+<br>
+@if (!selected){
+<div class="w-25 border border-primary" style="background-color: #f9ebed;">
+ <h3 class="mt-3 px-4">Adding Workout</h3>
+  <form name="addWorkoutForm" class="px-4 py-4">
+		<div>
+			<label class="form-label small"    for="memberId">Member Id</label>
+      <input class="form-control"  [(ngModel)]="newWorkout.member.id" type="number" name="memberId" id="memberId">
+		</div>
+
+		<div>
+			<label class="form-label small"  for="activityId">Activity ID</label>
+      <input class="form-control" [(ngModel)]="newWorkout.activity.id" type="number" name="activityId" id="activityId">
+		</div>
+
+		<div>
+			<label  class="form-label small" for="duration">Duration</label>
+      <input class="form-control" [(ngModel)]="newWorkout.duration" type="number" name="duration" id="duration">
+		</div>
+
+		<div>
+			<label class="form-label small" for="workoutDate">Workout Date</label>
+      <input class="form-control" [(ngModel)]="newWorkout.workoutDate" type="date" name="workoutDate" id="workoutDate">
+		</div>
+
+		<div>
+			<label class="form-label small" for="comment">Comment</label>
+      <input class="form-control" [(ngModel)]="newWorkout.comment" type="text" name="comment" id="comment">
+		</div>
+		<br>
+    <button class="btn btn-danger btn-sm mt-3" (click)="editWorkout= null">Cancel</button>
+		<button class="btn btn-primary btn-sm mt-3" (click)="addWorkout(newWorkout)">Add Workout</button>
+	</form>
+</div>}
+<br>
+@if (selected){
+  <div class="w-25 border border-primary" style="background-color: #f9ebed;">
+   <h3 class="mt-3 px-4">Editing Workout ID: {{selected.id}}</h3>
+  <form class="px-4 py-4">
+
+    <div>
+			<label for="memberId" class="form-label small">Member Id</label>
+      <input class="form-control" [(ngModel)]="selected.member.id" type="number" name="memberId" id="memberId">
+		</div>
+
+		<div>
+			<label for="activityId" class="form-label small">Activity ID</label>
+      <input class="form-control" [(ngModel)]="selected.activity.id" type="number" name="activityId" id="activityId">
+		</div>
+
+		<div>
+			<label for="duration" class="form-label small">Duration</label>
+      <input class="form-control" [(ngModel)]="selected.duration" type="number" name="duration" id="duration">
+		</div>
+
+		<div>
+			<label for="workoutDate" class="form-label small">Workout Date</label>
+      <input class="form-control" [(ngModel)]="selected.workoutDate" type="date" name="workoutDate" id="workoutDate">
+		</div>
+
+		<div>
+			<label for="comment" class="form-label small">Comment</label>
+      <input class="form-control" [(ngModel)]="selected.comment" type="text" name="comment" id="workout">
+		</div>
+
+    <button class="btn btn-danger btn-sm mt-3 px-2"  (click)="displayTable()">Cancel</button>
+    <button class="btn btn-primary btn-sm mt-3"  (click)="updateWorkout(selected)">Save</button>
+  </form>
+</div>}

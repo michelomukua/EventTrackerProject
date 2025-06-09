@@ -1,0 +1,53 @@
+
+EventTracker REST API
+
+# Overview
+1. The first goal of the project was to create a Java entity class POJO that modeled a database table. Then configure a Spring Boot app to publish a REST API of the model. A physical exerice workout database table was created, annotated using Spring REST annotations then CRUD operations executed on it using Spring Data JPA. The REST API send and receive was executed using JSON.
+
+
+
+Endpoints
+HTTP Verb URI Request Body  Response Body Status
+GET /api/workouts   List of workouts  200
+GET /api/workous/17   Single workout  200 or 404
+POST  /api/workouts JSON of new workout JSON of created workout 201 or 400
+PUT /api/workouts/17  JSON for updating workouts  JSON of updated workouts  200, 404, or 400
+DELETE  /api/workouts/17      204, 404, or 400
+
+  
+  Completed building out member, workout and activity entity tables in MySQL workbench.
+  Completed building and testing Java entity classes to match the table entities.
+  Createed repositories, services, and REST controllers for the respective entities.
+  Createed controller and service logic to perform the basic CRUD operations of the REST API.
+  Tested these routes using Postman as detailed with following:
+
+
+# JavaScript AJAX Front End
+
+  Added scripts to the EventTracker web application
+  Sent asynchronous requests to the Java controllers with JavaScript's XMLHttpRequest
+  Consumed and parsed JSON responses with JavaScript
+  Built HTML with JavaScript
+  Sent POST/PUT/DELETE requests with XMLHttpRequest
+
+# Angular Front End
+  
+  Added angular functionality. 
+  Configured my workout application by bringing in dependencies and setting up the file structure.
+
+  Sent asynchronous requests to the server using http.
+
+  Used the workout service in the Workout controller to display your all workout.
+
+  Build up Create/Read/Update/Delete functionality on the client.
+
+  Add functionality. Once your presentation for your get is working, add a function that uses the response data to present the data in some other form (For instance, total all of the hours you worked and calculate the amount of money you are owed. This would involve retrieving all of the "PunchCard" records, totaling their values, and displaying the total multiplied times your hourly rate somewhere on the page.)
+
+
+# Technologies Used
+  RESTapi
+  Angular
+  AJavaScript Front End
+
+
+  
